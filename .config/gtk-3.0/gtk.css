@@ -1,17 +1,35 @@
-window.xfce4-panel widget > box > button > image{
-   padding: 0.2em 0.16em;  -gtk-icon-transform: scale(0.8);
+/* Whisker Menu */
+window#whiskermenu-window treeview > * {
+  padding: 0.2em 0.16em;
 }
 
-window#whiskermenu-window treeview>* {
-  padding:0.2em 0.16em;
+/* XFCE Panel - Spaziatura generale */
+.xfce4-panel button {
+  padding: 0 4px;
+  margin: 0 1px;
 }
 
+.xfce4-panel button image {
+  padding: 0 2px;
+  -gtk-icon-transform: none;
+}
+
+/* Area Tray / Indicatori di stato */
+#pulseaudio-button image,
 #xfce4-notification-plugin image {
-	-gtk-icon-transform: scale(0.85) translateY(3px);
+  padding: 0 4px;
+  -gtk-icon-transform: none;
 }
-#pulseaudio-button image {
-	-gtk-icon-transform: scale(0.9);
+
+/* Orologio */
+#xfce4-clock-plugin,
+#clock-button {
+  padding: 0 8px;
+  font-weight: 500;
 }
-#xfce4-power-manager-plugin image {
-	-gtk-icon-transform: scale(0.75);
+
+/* Separatore finale per distanziare il pulsante dal bordo estremo destro */
+#separator-15,
+.xfce4-panel widget:last-child {
+  min-width: 20px;
 }
