@@ -68,5 +68,5 @@ sudo pacman -S --needed papirus-icon-theme libreoffice-still libreoffice-still-i
 
 ## 🙏 Crediti e Riconoscimenti
 
-* **Creatore originale del tema:** [EndeavourOS Team](https://github.com/endeavouros-team/endeavouros-xfce4-theming) & [kerness](https://github.com/kerness).
+* **Creatore originale del tema:** [EndeavourOS Team](https://github.com/EndeavourOS-Community-Editions/endeavouros-xfce4-theming) & [kerness](https://github.com/kerness).
 * **Modifiche, fix VGA e ottimizzazioni hardware low-power:** Realizzate per **AMD E1-2500 APU** su **Arch Linux** da [giorossi-sudo](https://github.com/giorossi-sudo).
