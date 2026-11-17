@@ -1,0 +1,29 @@
+/* Whisker Menu */
+window#whiskermenu-window treeview > * {
+  padding: 0.2em 0.16em;
+}
+
+/* XFCE Panel - Spaziatura generale */
+.xfce4-panel button {
+  padding: 0 4px;
+  margin: 0 1px;
+}
+
+.xfce4-panel button image {
+  padding: 0 2px;
+  -gtk-icon-transform: none;
+}
+
+/* Area Tray / Indicatori di stato */
+#pulseaudio-button image,
+#xfce4-notification-plugin image {
+  padding: 0 4px;
+  -gtk-icon-transform: none;
+}
+
+/* Orologio */
+#xfce4-clock-plugin,
+#clock-button {
+  padding: 0 8px;
+  font-weight: 500;
+}

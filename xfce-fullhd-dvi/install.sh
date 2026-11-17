@@ -2,6 +2,9 @@
 # Script di installazione e allineamento dotfiles XFCE4
 set -e
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
 echo "==> Copia delle configurazioni utente..."
 mkdir -p "$HOME/.config" "$HOME/.local/share/backgrounds"
 
@@ -47,6 +50,7 @@ fi
 # Ricaricamento dell'interfaccia
 echo "==> Ricaricamento del pannello XFCE e del gestore finestre..."
 xfce4-panel -r || true
+xfdesktop --reload || true
 xfwm4 --replace >/dev/null 2>&1 & disown || true
 
 echo "==> Installazione completata con successo!"

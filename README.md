@@ -5,7 +5,7 @@
 [![Icons: Papirus](https://img.shields.io/badge/Icons-Papirus--Dark-purple)](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
 [![License: GPLv3](https://img.shields.io/badge/License-GPLv3-green.svg)](LICENSE)
 
-Configurazione personalizzata, ultra-leggera e ottimizzata di **XFCE4** su **Arch Linux**, rifinita per hardware a basso consumo e display analogici VGA. Basata sul progetto originale del team di **EndeavourOS**.
+Configurazione personalizzata, ultra-leggera e ottimizzata di **XFCE4** su **Arch Linux**, rifinita per hardware a basso consumo e monitor Full HD. Basata sul progetto originale del team di **EndeavourOS**.
 
 ---
 
@@ -23,15 +23,24 @@ Questa configurazione è studiata appositamente per garantire la massima fluidit
 * **Memoria (RAM):** 8 GB DDR3 + 3.6 GB ZRAM compressa (`vm.swappiness = 180`, `vm.page-cluster = 0`)
 * **Scheda Video (GPU):** AMD Radeon HD 8240 (Kabini, GCN 1.1, driver kernel `amdgpu` con supporto Mesa / RADV)
 * **Archiviazione:** SSD SATA 240 GB (con TRIM periodico abilitato)
-* **Monitor & Connessione:** Risoluzione nativa `1680x1050` (16:10) connesso tramite porta analogica **VGA**
+* **Monitor supportati (due profili nella repo):**
+  * `xfce-fullhd-dvi/` — **BenQ GW2270** `1920x1080` (16:9) @ 60 Hz in digitale **DVI-D**
+  * `xfce-vga-1680x1050/` — Monitor `1680x1050` (16:10) su porta analogica **VGA**
+
+---
+
+## 📁 Struttura della Repository
+
+* **`xfce-fullhd-dvi/`**: configurazione attuale per monitor Full HD digitale (`margin_right = 0`, pannello senza separatori anti-overscan, font rendering `hintslight`/`rgb`, sfondo nativo `sfondo_1920x1080.png`).
+* **`xfce-vga-1680x1050/`**: configurazione dedicata a monitor analogici VGA (`margin_right = 26` in `xfwm4`, separatori extra a fine pannello per compensare l'overscan, sfondo nativo `xfce-x-1680x1050.png`).
 
 ---
 
 ## 🚀 Ottimizzazioni e Migliorie Implementate
 
-### 1. Fix Segnale VGA Analogico & Margini Finestre
-* **Margine Destro Finestre a 26px (`xfwm4`):** Sui monitor LCD collegati in analogico (VGA), un disallineamento di clock/fase del segnale fa spesso slittare l'immagine verso destra, tagliando il pulsante di chiusura `[X]` delle finestre massimizzate. Con un margine desktop dedicato di 26px, le finestre a tutto schermo rimangono sempre al 100% visibili e cliccabili.
-* **Pulsante Spegnimento Pannello Rientrato:** Aggiunto uno spaziatore a fine pannello per tenere l'icona di spegnimento a 33px dal bordo destro, prevenendo il ritaglio da overscan.
+### 1. Resa Visiva & Profili Monitor
+* **Profilo `xfce-fullhd-dvi`:** margini finestre a `0px` su `DVI-D` e subpixel rendering `Xft` (`Antialias=1`, `HintStyle=hintslight`, `RGBA=rgb`) per la massima nitidezza su pannelli LCD Full HD.
+* **Profilo `xfce-vga-1680x1050`:** margine destro `xfwm4` a `26px` e separatori a fine pannello per prevenire il taglio del tasto `[X]` e del pulsante Spegnimento causato dallo slittamento/overscan analogico VGA.
 
 ### 2. Tema Icone Moderno & Nitido (Papirus-Dark)
 * Sostituite le vecchie icone raster con **Papirus-Dark** (vettoriali SVG puliti, moderni e leggerissimi).
@@ -42,7 +51,7 @@ Questa configurazione è studiata appositamente per garantire la massima fluidit
 * Lanciatori rapidi di **LibreOffice Writer** (Word) e **LibreOffice Calc** (Excel) integrati direttamente sul pannello principale accanto a Firefox.
 
 ### 4. Alleggerimento Carico CPU & Zero Overhead
-* **Sfondo Nativo Pre-renderizzato:** Sostituita la rasterizzazione in tempo reale di file SVG pesanti (3840x2400) con uno sfondo PNG nativo `1680x1050`, azzerando i picchi di calcolo di Cairo/xfdesktop.
+* **Sfondo Nativo Dedicato:** Sfondo PNG nativo alla risoluzione esatta del profilo (`sfondo_1920x1080.png` per Full HD, `xfce-x-1680x1050.png` per VGA), azzerando i picchi di calcolo di Cairo/xfdesktop.
 * **Disattivazione Screensaver Ridondante:** Rimosso il demone software `xfce4-screensaver` in favore del risparmio energetico hardware nativo DPMS gestito dal monitor.
 * **Protezione Freeze su Thunar:** Limitata la creazione di miniature (*thumbnails*) ai soli file locali inferiori a 10 MB per evitare che cartelle pesanti saturino la CPU a 1.4 GHz.
 * **Accelerazione Hardware GPU & Zero Accessibility Overhead:** Configurate in `~/.xprofile` (caricato direttamente da LightDM) le variabili d'ambiente per `radeonsi` (VA-API), WebRender e `NO_AT_BRIDGE=1` per disattivare il bridge `at-spi` e risparmiare RAM/D-Bus.
@@ -56,7 +65,12 @@ Questa configurazione è studiata appositamente per garantire la massima fluidit
 ```bash
 git clone https://github.com/giorossi-sudo/xfce-dotfiles.git
 cd xfce-dotfiles
-./install.sh
+
+# Per monitor Full HD digitale (DVI-D / HDMI):
+./xfce-fullhd-dvi/install.sh
+
+# Oppure per monitor analogico VGA 1680x1050:
+./xfce-vga-1680x1050/install.sh
 ```
 
 Pacchetti aggiuntivi consigliati per questa configurazione:
@@ -69,4 +83,4 @@ sudo pacman -S --needed papirus-icon-theme libreoffice-still libreoffice-still-i
 ## 🙏 Crediti e Riconoscimenti
 
 * **Creatore originale del tema:** [EndeavourOS Team](https://github.com/EndeavourOS-Community-Editions/endeavouros-xfce4-theming) & [kerness](https://github.com/kerness).
-* **Modifiche, fix VGA e ottimizzazioni hardware low-power:** Realizzate per **AMD E1-2500 APU** su **Arch Linux** da [giorossi-sudo](https://github.com/giorossi-sudo).
+* **Modifiche e ottimizzazioni hardware low-power:** Realizzate per **AMD E1-2500 APU** su **Arch Linux** da [giorossi-sudo](https://github.com/giorossi-sudo).
