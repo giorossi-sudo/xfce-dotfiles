@@ -73,10 +73,15 @@ cd xfce-dotfiles
 ./xfce-vga-1680x1050/install.sh
 ```
 
-Pacchetti aggiuntivi consigliati per questa configurazione:
+Pacchetti richiesti / consigliati su Arch Linux (il tema `Arc-Darker-solid` è già incluso nella repo in `.local/share/themes/`):
 ```bash
-sudo pacman -S --needed papirus-icon-theme libreoffice-still libreoffice-still-it ttf-liberation hunspell-it
+sudo pacman -S --needed \
+  papirus-icon-theme capitaine-cursors noto-fonts xorg-xrandr \
+  xfce4-whiskermenu-plugin xfce4-notifyd xfce4-pulseaudio-plugin qt5ct \
+  libreoffice-still libreoffice-still-it ttf-liberation hunspell-it
 ```
+
+*(Lo script `install.sh` gestisce automaticamente il riavvio di `xfconfd` se eseguito da una sessione XFCE attiva e applica lo sfondo sull'uscita video rilevata da `xrandr`.)*
 
 ---
 
